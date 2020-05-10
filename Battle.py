@@ -73,6 +73,10 @@ def Player_choice(player,mobs):
 		if player.check(select) == 'Not enough Soul' or player.check(select) == 'Not enough Ammo':
 			printSlow('{} for that attack!'.format(player.check(select)),.005)
 			printSlow()
+			k = -1
+			s = -1
+			m = -1
+
 		choice = inputSlow('Action: Skills, Projections, Guns\n')
 		printSlow()
 

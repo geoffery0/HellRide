@@ -45,7 +45,7 @@ class Angel():
 						return 0, 'Enflame'
 					else:
 						self.CSoul -= 4
-						return 40 * self.mod , 'Burn'
+						return 70 * self.mod , 'Burn'
 			
 
 
