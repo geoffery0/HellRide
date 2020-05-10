@@ -49,38 +49,38 @@ doom = 0
 while gameclass == "":
 	if inputSlow("GAME: Are you Pure of Heart? (YES or NO): ") == "YES":
 		gameclass = 0
-		Abil,Skills,Spells,Guns,HP,Atk,Def,MP,Ammo,Classname = chtrcls(gameclass)
+		player = chtrcls(gameclass,gamername)
 
-		Display_Stats(HP,MP,Ammo,Atk,Def,Classname)
-		Display_Abilities(Abil)
-		Display_Skills(Skills)
-		Display_Spells(Spells)
-		Display_Guns(Guns)
+		Display_Stats(player)
+		Display_Abilities(player.Abil)
+		Display_Skills(player.skills)
+		Display_Spells(player.spells)
+		Display_Guns(player.Guns)
 		gameclass = ""
 		if inputSlow("\nGAME: Are you sure? (YES or NO): ") == 'YES':
 			gameclass = 0
 			break
 	if inputSlow("GAME: Are you Dumb of Ass? (YES or NO): ") == "YES":
 		gameclass =  1
-		Abil,Skills,Spells,Guns,HP,Atk,Def,MP,Ammo,Classname = chtrcls(gameclass)
+		player = chtrcls(gameclass,gamername)
 
-		Display_Stats(HP,MP,Ammo,Atk,Def,Classname)
-		Display_Abilities(Abil)
-		Display_Skills(Skills)
-		Display_Spells(Spells)
-		Display_Guns(Guns)
+		Display_Stats(player)
+		Display_Abilities(player.Abil)
+		Display_Skills(player.skills)
+		Display_Spells(player.spells)
+		Display_Guns(player.Guns)
 		gameclass = ""
 		if inputSlow("\nGAME: Are you sure? (YES or NO): ") == 'YES':
 			gameclass = 1
 			break
 	if inputSlow("GAME: Are you Ass of Hole? (YES or NO): ") == "YES":
 		gameclass =  2
-		Abil,Skills,Spells,Guns,HP,Atk,Def,MP,Ammo,Classname = chtrcls(gameclass)
-		Display_Stats(HP,MP,Ammo,Atk,Def,Classname)
-		Display_Abilities(Abil)
-		Display_Skills(Skills)
-		Display_Spells(Spells)
-		Display_Guns(Guns)
+		player = chtrcls(gameclass,gamername)
+		Display_Stats(player)
+		Display_Abilities(player.Abil)
+		Display_Skills(player.skills)
+		Display_Spells(player.spells)
+		Display_Guns(player.Guns)
 		gameclass = ""
 		if inputSlow("\nGAME: Are you sure? (YES or NO): ") == 'YES':
 			gameclass = 2
@@ -95,8 +95,8 @@ player = chtrcls(gameclass,gamername)
 
 Display_Stats(player)
 Display_Abilities(player.Abil)
-Display_Skills(player.Skills)
-Display_Spells(player.Spells)
+Display_Skills(player.skills)
+Display_Spells(player.spells)
 Display_Guns(player.Guns)
 area = Location(0)
 printSlow()
