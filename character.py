@@ -333,7 +333,7 @@ class chtrcls():
 	def HealthX(self):
 		percent = None
 		while percent == None:
-			percent = inputSlow('How much life do you want to use?(Whole Number): ')
+			percent = inputSlow('How much life do you want to use?(Percent as a whole number): ')
 			try:
 				percent = int(percent)
 				if percent >= (self.CHP/self.HP)*100:
