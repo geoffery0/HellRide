@@ -94,6 +94,9 @@ class chtrcls():
 		self.luck = False
 
 	def check(self,action):
+		if action in '1 2 3 4 5 6 7 8 9 0 a s d f g h j k l q w e r t y u i o p z x c v b n m':
+			return None
+
 		if action == None:
 			return None
 
@@ -173,6 +176,9 @@ class chtrcls():
 				return 'Not enough Ammo'
 			return 0
 
+		if action in 'Fuck Up':
+			return 0
+
 	def attack(self,action):
 		if action == None:
 			return None
@@ -230,6 +236,9 @@ class chtrcls():
 
 		if action in 'Pool Pistol':
 			return self.PoolP()
+
+		if action in 'Fuck Up':
+			return self.FUp()
 
 
 
@@ -369,6 +378,16 @@ class chtrcls():
 		if self.CSoul > self.Soul:
 			self.CSoul = self.Soul
 		return 340 , 'Pool Pistol'
+
+	def FUp(self):
+		return 100 , 'Fuck Up'
+
+	def ABuff(self):
+		pass
+
+
+
+
 
 
 

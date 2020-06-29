@@ -9,25 +9,25 @@ def Display_Abilities(Abil):
 	printSlow("\nAbilities:")
 	for index in Abil:
 		single = Abilities(index)
-		printSlow("Name: %-30s   Description: %s"%(single[0],single[1]),.005)
+		printSlow("Name: %-33s   Description: %s"%(single[0],single[1]),.005)
 
 def Display_Skills(Skil):
 	printSlow("\nSkills:")
 	for index in Skil:
 		single = Skills(index)
-		printSlow("Name: %-30s   Description: %s"%(single[0],single[1]),.005)
+		printSlow("Name: %-33s   Description: %s"%(single[0],single[1]),.005)
 
 def Display_Spells(Spel):
 	printSlow("\nSpells:")
 	for index in Spel:
 		single = Spells(index)
-		printSlow("Name: %-30s   Description: %s"%(single[0],single[1]),.005)
+		printSlow("Name: %-33s   Description: %s"%(single[0],single[1]),.005)
 
 def Display_Guns(Gun):
 	printSlow("\nGuns:")
 	for index in Gun:
 		single = Guns(index)
-		printSlow("Name: %-30s   GunType: %-21s   Description: %s"%(single[0],single[1],single[2]),.005)
+		printSlow("Name: %-33s   GunType: %-21s   Description: %s"%(single[0],single[1],single[2]),.005)
 
 def Display_Location(Location):
 	printSlow('{}:'.format(Location.name))

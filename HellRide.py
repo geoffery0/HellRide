@@ -41,7 +41,7 @@ printSlow("geo: My name is geoffery6ix but you can call me geo")
 printSlow("geo: Thank you for playing my game, I know it isn't finished yet but it's my first game so please be patient")
 printSlow("geo: If you have any suggestions or run into any bugs please let me know!")
 printSlow()
-printSlow("geo: For the purpose of this demo there will be 3 very simple classes:")
+printSlow("geo: For the purpose of this demo there will be 3 classes:")
 printSlow()
 printSlow("GAME: Choose your class (Pure of Heart, Dumb of Ass, Ass of Hole)")
 gameclass = ""
