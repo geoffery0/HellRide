@@ -1,4 +1,5 @@
 from random import randint
+from dialogueText import *
 
 class chtrcls():
 	def __init__(self,gameclass,name):
@@ -9,7 +10,7 @@ class chtrcls():
 			self.skills = [0,1,2,3]
 			self.spells = [1,2,4,10,3]
 			self.Guns = [0]
-			self.HP = 1000
+			self.HP = 1200
 			self.Atk = 30
 			self.Def = 60
 			self.Soul = 20
@@ -71,6 +72,7 @@ class chtrcls():
 		self.Lskills = []
 		self.Lspells = []
 		self.LGuns = []
+		self.mod = []
 
 		for index in self.Abil:
 			a = Abilities(index)
@@ -107,6 +109,9 @@ class chtrcls():
 		if action in 'Flail':
 			return 0
 
+		if action in 'Pure Flash':
+			return 0
+
 		if action in '(X)plode':
 			if self.CSoul < 5:
 				return 'Not enough Soul'
@@ -133,6 +138,37 @@ class chtrcls():
 			return 0
 
 		if action in '+1 Tommy Gun':
+			if self.CAmmo < 1:
+				return 'Not enough Ammo'
+			return 0
+
+		if action in 'Heal':
+			if self.CSoul < 5:
+				return 'Not enough Soul'
+			return 0
+
+		if action in 'Blast Flash':
+			if self.CSoul < 3:
+				return 'Not enough Soul'
+			return 0
+
+		if action in 'Def Buff':
+			return 0
+
+		if action in 'Health Explosion':
+			return 0
+
+		if action in 'Vitality Drip':
+			if self.CSoul < 5:
+				return 'Not enough Soul'
+			return 0
+
+		if action in 'Bubble Skin':
+			if self.CSoul < 4:
+				return 'Not enough Soul'
+			return 0
+
+		if action in 'Pool Pistol':
 			if self.CAmmo < 1:
 				return 'Not enough Ammo'
 			return 0
@@ -171,6 +207,32 @@ class chtrcls():
 		if action in '+1 Tommy Gun':
 			return self.Tommy()
 
+		if action in 'Heal':
+			return self.Heal()
+
+		if action in 'Pure Flash':
+			return self.PFlash()
+
+		if action in 'Blast Flash':
+			return self.BFlash()
+
+		if action in 'Def Buff':
+			return self.DBuff()
+
+		if action in 'Health Explosion':
+			return self.HealthX()
+
+		if action in 'Vitality Drip':
+			return self.Vitality()
+
+		if action in 'Bubble Skin':
+			return self.Bubble()
+
+		if action in 'Pool Pistol':
+			return self.PoolP()
+
+
+
 	def Rest(self):
 		self.CSoul += 6
 		if self.CSoul > self.Soul:
@@ -180,6 +242,7 @@ class chtrcls():
 	def Trip(self):
 		if randint(1,4) == 1:
 			self.CAmmo += 1
+			printSlow('You found some ammo!')
 			if self.CAmmo > self.Ammo:
 				self.CAmmo = self.Ammo
 		elif type(self.luck) == int:
@@ -243,11 +306,114 @@ class chtrcls():
 			damage += randint(1,5)*17
 		return damage , '+1 Tommy Gun'
 
+	def Heal(self):
+		
+		self.CSoul -= 5
+
+		self.CHP += (self.HP*35)//100
+		if self.CHP > self.HP:
+			self.CHP = self.HP
+		return 0 , 'Heal'
+
+	def PFlash(self):
+		self.CSoul += 1
+		if self.CSoul > self.Soul:
+			self.CSoul = self.Soul
+		return 60 , 'Pure Flash'
+
+	def BFlash(self):
+		self.CSoul -= 3
+		return 180 , 'Blast Flash'
+
+	def DBuff(self):
+		new = self.Def//3 
+		self.Def += new
+		self.mod.append(('2Def:33%',new))
+
+	def HealthX(self):
+		percent = None
+		while percent == None:
+			percent = inputSlow('How much life do you want to use?(Whole Number): ')
+			try:
+				percent = int(percent)
+				if percent >= (self.CHP/self.HP)*100:
+					percent = (self.CHP//self.HP)*100 - 1
+				if percent < 0:
+					percent = 0
+			except:
+				pass
+		damage = (self.CHP*percent)//100
+		self.HP -= damage
+		return (3000 * percent)//100, 'Health Explosion'
+
+	def Vitality(self):
+		self.CSoul -= 5
+		self.CHP += round(self.HP*.10)
+		if self.CHP > self.HP:
+			self.CHP = self.HP
+		self.mod.append(('Vitality', 5))
+
+		return 0,'Vitality Drip'
+
+	def Bubble(self):
+		self.CSoul -= 4
+		self.effect = ['Bubble', round(self.HP*.15)]
+
+		return 0 , 'Bubble Skin'
+
+	def PoolP(self):
+		self.CAmmo -= 1
+		self.CSoul += 3
+		if self.CSoul > self.Soul:
+			self.CSoul = self.Soul
+		return 340 , 'Pool Pistol'
 
 
-# add damage calculation function in Battle.py
-# finish adding skills, projections, and guns to class 1 and then add attacks for spawning enemies
-# send that to alan
+
+	def mods(self):
+		if type(self.luck) != bool:
+			self.luck -= 1
+			print(self.luck)
+			if self.luck == -1:
+				self.luck = False
+		for change in range(len(self.mod)):
+			if type(self.mod[change]) == tuple:
+				if self.mod[change][0] == '2Def:33%':
+					self.mod[change] = ('1Def:33%',self.mod[change][1])
+					break
+
+				elif self.mod[change][0] == '1Def:33%':
+					self.mod[change] = ('0Def:33%',self.mod[change][1])
+					break
+
+				elif self.mod[change][0] == '0Def:33%':
+					self.Def -= self.mod[change][1]
+					del self.mod[change]
+					break
+
+				if self.mod[change][0] == 'vitality':
+					if self.mod[change][1] == 0:
+						del self.mod[change]
+						break
+					else:
+						self.mod[change][1] -= 1
+						self.CHP += round(self.HP*.10)
+						if self.CHP > self.HP:
+							self.CHP = self.HP
+						break
+
+
+
+
+
+
+
+
+
+
+
+
+
 		
 
 
@@ -370,7 +536,7 @@ def Skills(index):
 
 	elif index == 9:
 		name = "Soul Siphon"
-		desc = "Steals MP from enemy and deals light damage"
+		desc = "Steals Soul from enemy and deals light damage"
 		return [name,desc]
 
 	elif index == 10:
@@ -394,12 +560,12 @@ def Spells(index):
 
 	elif index == 1:
 		name = "Heal"
-		desc = "Heals 35% HP - 5MP"
+		desc = "Heals 35% HP - 5 Soul"
 		return [name,desc]
 
 	elif index == 2:
 		name = "Blast Flash"
-		desc = "A more powerful flash - 3MP"
+		desc = "A more powerful flash - 3 Soul"
 		return [name,desc]
 
 	elif index == 3:
@@ -409,7 +575,7 @@ def Spells(index):
 
 	elif index == 4:
 		name = "Vitality Drip"
-		desc = "Regenerates HP over time - 5MP"
+		desc = "Regenerates HP over time - 5 Soul"
 		return [name,desc]
 
 	elif index == 5:
@@ -424,12 +590,12 @@ def Spells(index):
 
 	elif index == 7:
 		name = "Def debuff"
-		desc = "Permanently lowers enemies Def - 4MP"
+		desc = "Permanently lowers enemies Def - 4 Soul"
 		return [name,desc]
 
 	elif index == 8:
 		name = "Soular Burst"
-		desc = "Massive damage - 6MP"
+		desc = "Massive damage - 6 Soul"
 		return [name,desc]
 
 	elif index == 9:
@@ -439,12 +605,12 @@ def Spells(index):
 
 	elif index == 10:
 		name = "Bubble Skin"
-		desc = "Creates a shield for 15% HP that blocks incoming attacks - 4MP"
+		desc = "Creates a shield for 15% HP that blocks incoming attacks - 4 Soul"
 		return [name,desc]
 
 	elif index == 11:
 		name = "Chainsaw"
-		desc = "instantly kills and enemy - Drops lots of ammo - 1MP-5MP depending on strength of enemy"
+		desc = "instantly kills and enemy - Drops lots of ammo - 1-5 Soul depending on strength of enemy"
 		return [name,desc]
 
 	
@@ -456,7 +622,7 @@ def Guns(index):
 	if index == 0:
 		name = "Pool Pistol"
 		guntype = "Sidearm, Basic weapon"
-		desc = "Single shot - heals 3MP"
+		desc = "Single shot - heals 3 Soul"
 		return [name,guntype,desc]
 
 	elif index == 1:

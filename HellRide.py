@@ -90,8 +90,9 @@ while gameclass == "":
 		printSlow("you load your shotgun with malicious intent.", .05)
 		gameclass = -1
 	doom+=1
-lvl = 1
+
 player = chtrcls(gameclass,gamername)
+player.lvl = 1
 
 Display_Stats(player)
 Display_Abilities(player.Abil)

@@ -149,16 +149,14 @@ def Player_choice(player,mobs):
 def strife(player, area = heaven.area):
 	mobs = spawn(area)
 	while len(mobs) != 0:
-		if player.luck != False:
-			player.luck -= 1
-			print(player.luck)
-			if player.luck == -1:
-				player.luck = False
+		player.mods()
+		print(player.luck)
 		printSlow()
 		Display_enemies(mobs)
 		target , select = Player_choice(player,mobs)
 
 		if target != -1:
+
 			attack , select = player.attack(select)
 			if type(target) == int:
 				if type(attack) == int: 
@@ -187,7 +185,13 @@ def strife(player, area = heaven.area):
 				if mob.effect == 'acc':
 					if randint(1,2) == 2:
 						damage = 0
-				player.CHP -= damage
+				if player.effect == None:
+					player.CHP -= damage
+				else:
+					printSlow('The Bubble Protected you!')
+					player.effect[1] -= damage
+					if player.effect[1] <= 0:
+						player.effect = None
 				if player.CHP <= 0:
 					
 					printSlow('The {} used {} and dealt {} damage which killed {}!'.format(mob.name,Atkname, damage, player.name), .005)
@@ -200,11 +204,16 @@ def strife(player, area = heaven.area):
 
 
 
+char = None
+while char == None:
+	char = inputSlow('Pure of Heart or Dumb of Ass? \n \n')
+	if char == 'Pure of Heart':
+		player = chtrcls(0,'Jake')
+	elif char == 'Dumb of Ass':
+		player = chtrcls(1,'Jake')
+	else:
+		char = None
 
-
-
-
-player = chtrcls(1,'Jake')
 
 strife(player)
 
