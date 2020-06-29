@@ -188,7 +188,7 @@ def strife(player, area = heaven.area):
 				if player.effect == None:
 					player.CHP -= damage
 				else:
-					printSlow('The Bubble Protected you!')
+					printSlow('The Bubble Protected you!', .005)
 					player.effect[1] -= damage
 					if player.effect[1] <= 0:
 						player.effect = None
@@ -200,6 +200,7 @@ def strife(player, area = heaven.area):
 				else:
 					
 					printSlow('{} used {} and dealt {} damage!'.format(mob.name,Atkname, damage), .005)
+		player.Clean()
 
 
 

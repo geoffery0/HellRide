@@ -401,6 +401,12 @@ class chtrcls():
 		for thing in delete:
 			del self.mod[thing]
 
+	def Clean(self):
+		for change in range(len(self.mod)):
+			if type(self.mod[change]) == tuple:
+				if self.mod[change][0] == '2Def:33%' or self.mod[change][0] == '1Def:33%' or self.mod[change][0] == '0Def:33%':
+					self.Def -= self.mod[change][1]
+
 
 
 
