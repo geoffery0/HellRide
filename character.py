@@ -371,6 +371,7 @@ class chtrcls():
 
 
 	def mods(self):
+		delete = []
 		if type(self.luck) != bool:
 			self.luck -= 1
 			print(self.luck)
@@ -380,27 +381,25 @@ class chtrcls():
 			if type(self.mod[change]) == tuple:
 				if self.mod[change][0] == '2Def:33%':
 					self.mod[change] = ('1Def:33%',self.mod[change][1])
-					break
 
 				elif self.mod[change][0] == '1Def:33%':
 					self.mod[change] = ('0Def:33%',self.mod[change][1])
-					break
 
 				elif self.mod[change][0] == '0Def:33%':
 					self.Def -= self.mod[change][1]
-					del self.mod[change]
-					break
+					delete.append(change)
 
 				if self.mod[change][0] == 'vitality':
 					if self.mod[change][1] == 0:
-						del self.mod[change]
-						break
+						delete.append(change)
+
 					else:
 						self.mod[change][1] -= 1
 						self.CHP += round(self.HP*.10)
 						if self.CHP > self.HP:
 							self.CHP = self.HP
-						break
+		for thing in delete:
+			del self.mod[thing]
 
 
 
