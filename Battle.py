@@ -91,7 +91,7 @@ def Player_choice(player,mobs):
 					if select in skill:
 						k = 0
 						s = 0
-						if select in 'Rest':
+						if select in 'Rest' or select in 'Def Buff':
 							m = 0
 							target = -1
 
@@ -107,7 +107,7 @@ def Player_choice(player,mobs):
 					if select in spell:
 						k = 0
 						s = 0
-						if select in 'Minor heal' or select in 'Cheat Life' or select in 'Load Gun':
+						if select in 'Minor heal' or select in 'Cheat Life' or select in 'Load Gun' or select in 'Heal':
 							m = 0
 							target = -1
 
@@ -150,8 +150,8 @@ def strife(player, area = heaven.area):
 	mobs = spawn(area)
 	while len(mobs) != 0:
 		player.mods()
-		print(player.luck)
 		printSlow()
+		#printSlow(player.Def)
 		Display_enemies(mobs)
 		target , select = Player_choice(player,mobs)
 
@@ -200,7 +200,7 @@ def strife(player, area = heaven.area):
 				else:
 					
 					printSlow('{} used {} and dealt {} damage!'.format(mob.name,Atkname, damage), .005)
-		player.Clean()
+	player.Clean()
 
 
 

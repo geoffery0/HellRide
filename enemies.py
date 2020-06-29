@@ -121,6 +121,7 @@ class Spirit():
 		if randint(1,100) > chance:
 			return 20 * self.mod , 'Wail'
 		else:
+			self.CSoul -= 3
 			return 50 * self.mod , 'Project'
 
 

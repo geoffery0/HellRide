@@ -327,8 +327,10 @@ class chtrcls():
 
 	def DBuff(self):
 		new = self.Def//3 
+		#print(new)
 		self.Def += new
 		self.mod.append(('2Def:33%',new))
+		return 0 , 'Def Buff'
 
 	def HealthX(self):
 		percent = None

@@ -5,7 +5,7 @@ from time import sleep
 #str int -> prints
 # takes a string and a number representing seconds and prints each letter after that many seconds
 def printSlow(words = '', num = .015):
-	str(words)
+	words = str(words)
 	for char in words:
 		if char != ' ':
 			sleep(num)
