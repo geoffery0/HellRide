@@ -97,7 +97,7 @@ class chtrcls():
 		if action == None:
 			return None
 
-		if action in '1 2 3 4 5 6 7 8 9 0 a s d f g h j k l q w e r t y u i o p z x c v b n m':
+		if action in '1 2 3 4 5 6 7 8 9 0 a s d f g h j k l q w e r t y u i o p z x c v b n m Q W E R T Y U I O P A S D F G H J K L Z X C V B N M':
 			return None
 
 		if action in 'Rest':
@@ -179,6 +179,9 @@ class chtrcls():
 		if action in 'Fuck Up':
 			return 0
 
+		if action in 'Atk buff':
+			return 0
+
 	def attack(self,action):
 		if action == None:
 			return None
@@ -239,6 +242,9 @@ class chtrcls():
 
 		if action in 'Fuck Up':
 			return self.FUp()
+
+		if action in 'Atk buff':
+			return self.ABuff()
 
 
 
@@ -336,10 +342,9 @@ class chtrcls():
 
 	def DBuff(self):
 		new = self.Def//3 
-		#print(new)
 		self.Def += new
 		self.mod.append(('2Def:33%',new))
-		return 0 , 'Def Buff'
+		return 0 , 'Def buff'
 
 	def HealthX(self):
 		percent = None
@@ -383,7 +388,17 @@ class chtrcls():
 		return 100 , 'Fuck Up'
 
 	def ABuff(self):
-		pass
+		new = round(self.Atk*.25) 
+		self.Atk += new
+		self.mod.append(('ABuff', 2 , new))
+		return 0 , 'Atk buff'
+
+	def Siphon(self):
+		return 'Siphon' , 'Soul Siphon'
+
+	def Soular(self):
+		self.CSoul -= 7
+		return 450 , 'Soular Burst'
 
 
 
@@ -419,6 +434,14 @@ class chtrcls():
 						self.CHP += round(self.HP*.10)
 						if self.CHP > self.HP:
 							self.CHP = self.HP
+
+				if self.mod[change][0] == 'ABuff':
+					if self.mod[change][1] == 0:
+						self.Atk -= self.mod[change][2]
+						delete.append(change)
+					else:
+						self.mod[change][1] -= 1
+
 		for thing in delete:
 			del self.mod[thing]
 
@@ -621,7 +644,7 @@ def Spells(index):
 
 	elif index == 8:
 		name = "Soular Burst"
-		desc = "Massive damage - 6 Soul"
+		desc = "Massive damage - 7 Soul"
 		return [name,desc]
 
 	elif index == 9:

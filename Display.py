@@ -18,7 +18,7 @@ def Display_Skills(Skil):
 		printSlow("Name: %-33s   Description: %s"%(single[0],single[1]),.005)
 
 def Display_Spells(Spel):
-	printSlow("\nSpells:")
+	printSlow("\nProjections:")
 	for index in Spel:
 		single = Spells(index)
 		printSlow("Name: %-33s   Description: %s"%(single[0],single[1]),.005)

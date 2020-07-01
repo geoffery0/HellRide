@@ -174,6 +174,25 @@ def strife(player, area = heaven.area):
 					mobs[target].effect = 'acc'
 					printSlow("{} used {} and lowered the {}'s accuracy!".format(player.name,select, mobs[target].name), .005)
 
+				elif attack == 'Siphon':
+					damage = (20*player.Atk) // mobs[target].Def
+					mobs[target].CHP -= damage
+
+					mobs[target].CSoul -= 4
+					if mobs[target].CSoul < 0:
+						mobs[target].CSoul = 0
+
+					player.CSoul += 4
+					if player.CSoul > player.Soul:
+						player.CSoul = player.Soul
+						
+					if mobs[target].CHP <= 0:
+						printSlow()
+						printSlow('{} used {} and dealt {} damage which killed the {}!'.format(player.name,select, damage, mobs[target].name), .005)
+						del mobs[target]
+
+
+
 		elif target == -1:
 			attack , select = player.attack(select)
 			printSlow('{} used {}!'.format(player.name,select), .005)
