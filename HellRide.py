@@ -4,6 +4,7 @@
 from dialogueText import *
 from character import *
 from Display import *
+from Battle import *
 
 
 printSlow("Beta: What's up shitlips? Welcome to The Ride.")
@@ -94,13 +95,18 @@ while gameclass == "":
 player = chtrcls(gameclass,gamername)
 player.lvl = 1
 
-Display_Stats(player)
-Display_Abilities(player.Abil)
-Display_Skills(player.skills)
-Display_Spells(player.spells)
-Display_Guns(player.Guns)
+#Display_Stats(player)
+#Display_Abilities(player.Abil)
+#Display_Skills(player.skills)
+#Display_Spells(player.spells)
+#Display_Guns(player.Guns)
 area = Location(0)
 printSlow()
 printSlow()
 Display_Location(area)
-inputSlow()
+printSlow()
+doya = 'butts'
+while doya != '':
+
+	strife(player)
+	imput = inputSlow('Type anything to play again (same class)')

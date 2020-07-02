@@ -23,5 +23,5 @@ def inputSlow(words = '', num = .015):
 			sleep(num)
 		print(char, end='', flush=True)
 	put = input()
-
+	put.strip()
 	return put

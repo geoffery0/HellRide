@@ -79,8 +79,9 @@ def Player_choice(player,mobs):
 
 		choice = inputSlow('Action: Skills, Projections, Guns\n')
 		printSlow()
-
+		
 		if 'sk' in choice or 'Skills' in choice or 'skills' in choice:
+			
 			while k == -1:
 				Display_Battle_Skills(player)
 				printSlow()
@@ -107,7 +108,7 @@ def Player_choice(player,mobs):
 					if select in spell:
 						k = 0
 						s = 0
-						if select in 'Minor heal' or select in 'Cheat Life' or select in 'Load Gun' or select in 'Heal':
+						if select in 'Minor heal' or select in 'Cheat Life' or select in 'Load Gun' or select in 'Heal' or select in 'Vitality Drip' or select in 'Bubble Skin':
 							m = 0
 							target = -1
 
@@ -190,6 +191,34 @@ def strife(player, area = heaven.area):
 						printSlow()
 						printSlow('{} used {} and dealt {} damage which killed the {}!'.format(player.name,select, damage, mobs[target].name), .005)
 						del mobs[target]
+						
+					else:
+						printSlow()
+						printSlow('{} used {} and dealt {} damage to the {}!'.format(player.name,select, damage,mobs[target].name), .005)
+
+
+				elif attack == 'DDebuff':
+					printSlow("{} used {} and lowered the {}'s Defense permenently!".format(player.name,select, mobs[target].name), .005)
+					mobs[target].Def -= mobs[target].Def//10
+
+				elif attack == 'VShotgun':
+					damage = (400*player.Atk) // mobs[target].Def
+					mobs[target].CHP -= damage
+
+					player.CHP += damage
+					if player.CHP > player.HP:
+						player.CHP = player.HP
+						
+					if mobs[target].CHP <= 0:
+						printSlow()
+						printSlow('{} used {} and dealt {} damage which killed the {}!'.format(player.name,select, damage, mobs[target].name), .005)
+						del mobs[target]
+						
+					else:
+						printSlow()
+						printSlow('{} used {} and dealt {} damage to the {}!'.format(player.name,select, damage,mobs[target].name), .005)				
+
+
 
 
 
@@ -223,7 +252,7 @@ def strife(player, area = heaven.area):
 
 
 
-
+'''
 char = None
 while char == None:
 	char = inputSlow('Pure of Heart or Dumb of Ass? \n \n')
@@ -236,6 +265,6 @@ while char == None:
 
 
 strife(player)
-
+'''
 
 

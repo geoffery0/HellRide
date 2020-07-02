@@ -155,7 +155,7 @@ class chtrcls():
 				return 'Not enough Soul'
 			return 0
 
-		if action in 'Def Buff':
+		if action in 'Def Buff' and self.Classname == 'Pure of Heart':
 			return 0
 
 		if action in 'Health Explosion':
@@ -181,6 +181,25 @@ class chtrcls():
 
 		if action in 'Atk buff':
 			return 0
+
+		if action in 'Soul Siphon':
+			return 0
+
+		if action in 'Soular Burst':
+			if self.CSoul < 7:
+				return 'Not enough Soul'
+			return 0
+
+		if action in 'Def debuff':
+			if self.CSoul < 4:
+				return 'Not enough Soul'
+			return 0
+
+		if action in 'Vampiric Shotgun':
+			if self.CAmmo < 1:
+				return 'Not enough Ammo'
+			return 0
+
 
 	def attack(self,action):
 		if action == None:
@@ -225,7 +244,7 @@ class chtrcls():
 		if action in 'Blast Flash':
 			return self.BFlash()
 
-		if action in 'Def Buff':
+		if action in 'Def Buff' and self.Classname == 'Pure of Heart':
 			return self.DBuff()
 
 		if action in 'Health Explosion':
@@ -245,6 +264,20 @@ class chtrcls():
 
 		if action in 'Atk buff':
 			return self.ABuff()
+
+		if action in 'Soul Siphon':
+			return self.Siphon()
+
+		if action in 'Soular Burst':
+			return self.Soular()
+
+		if action in 'Def debuff':
+			return self.DDebuff()
+
+		if action in 'Vampiric Shotgun':
+			return self.VShotgun()
+
+
 
 
 
@@ -400,6 +433,13 @@ class chtrcls():
 		self.CSoul -= 7
 		return 450 , 'Soular Burst'
 
+	def DDebuff(self):
+		self.CSoul -= 4
+		return 'DDebuff' , 'Def debuff'
+	
+	def VShotgun(self):
+		self.CAmmo -= 1
+		return 'VShotgun' , 'Vampiric Shotgun'
 
 
 
