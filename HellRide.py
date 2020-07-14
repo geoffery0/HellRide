@@ -1,3 +1,4 @@
+
 #why are you looking here
 #code written by geoffery6ix
 #I mean if youre here you might as well peep my game. oh wait.
@@ -5,6 +6,7 @@ from dialogueText import *
 from character import *
 from Display import *
 from Battle import *
+import pkg_resources
 
 
 printSlow("Beta: What's up shitlips? Welcome to The Ride.")

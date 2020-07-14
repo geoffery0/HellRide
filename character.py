@@ -97,7 +97,7 @@ class chtrcls():
 		if action == None:
 			return None
 
-		if action in '1 2 3 4 5 6 7 8 9 0 a s d f g h j k l q w e r t y u i o p z x c v b n m Q W E R T Y U I O P A S D F G H J K L Z X C V B N M':
+		if action in '1 2 3 4 5 6 7 8 9 0 a s d f g h j k l q w e r t y u i o p z x c v b n m Q W E R T Y U I O P A S D F G H J K L Z X C V B N M - ( ) ':
 			return None
 
 		if action in 'Rest':
@@ -423,7 +423,7 @@ class chtrcls():
 	def ABuff(self):
 		new = round(self.Atk*.25) 
 		self.Atk += new
-		self.mod.append(('ABuff', 2 , new))
+		self.mod.append(['ABuff', 2 , new])
 		return 0 , 'Atk buff'
 
 	def Siphon(self):
@@ -484,6 +484,14 @@ class chtrcls():
 
 		for thing in delete:
 			del self.mod[thing]
+
+
+
+	def AM(self, attack):
+		if 6 in self.Abil:
+			if randint(1,9) < 3:
+				return attack*1.2
+		return attack
 
 	def Clean(self):
 		for change in range(len(self.mod)):

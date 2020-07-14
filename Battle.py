@@ -3,6 +3,9 @@ from enemies import *
 from random import randint
 from dialogueText import *
 from character import *
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = 'hide'
+from pygame import mixer
 heaven = Location(0)
 
 #int,None/int --> list of objects
@@ -92,7 +95,7 @@ def Player_choice(player,mobs):
 					if select in skill:
 						k = 0
 						s = 0
-						if select in 'Rest' or select in 'Def Buff':
+						if select in 'Rest' or select in 'Def Buff' or select in 'Atk buff':
 							m = 0
 							target = -1
 
@@ -148,6 +151,13 @@ def Player_choice(player,mobs):
 
 
 def strife(player, area = heaven.area):
+	try:
+		mixer.init()
+		mixer.music.load('rudebuster.mp3')
+		mixer.music.play(-1)
+	except:
+		pass
+	deady = 0
 	mobs = spawn(area)
 	while len(mobs) != 0:
 		player.mods()
@@ -162,6 +172,7 @@ def strife(player, area = heaven.area):
 			if type(target) == int:
 				if type(attack) == int: 
 					damage = (attack*player.Atk) // mobs[target].Def
+					damage = player.AM(damage)
 					mobs[target].CHP -= damage
 					if mobs[target].CHP <= 0:
 						printSlow()
@@ -177,6 +188,7 @@ def strife(player, area = heaven.area):
 
 				elif attack == 'Siphon':
 					damage = (20*player.Atk) // mobs[target].Def
+					damage = player.AM(damage)
 					mobs[target].CHP -= damage
 
 					mobs[target].CSoul -= 4
@@ -203,6 +215,9 @@ def strife(player, area = heaven.area):
 
 				elif attack == 'VShotgun':
 					damage = (400*player.Atk) // mobs[target].Def
+					if player.CSoul == 0 and 7 in player.Abil:
+						damage = mobs[target].CHP
+					damage = player.AM(damage)
 					mobs[target].CHP -= damage
 
 					player.CHP += damage
@@ -241,14 +256,20 @@ def strife(player, area = heaven.area):
 					if player.effect[1] <= 0:
 						player.effect = None
 				if player.CHP <= 0:
-					
-					printSlow('The {} used {} and dealt {} damage which killed {}!'.format(mob.name,Atkname, damage, player.name), .005)
-					input()
-					quit()
+					if deady == 0 and 8 in player.Abil:
+						pass
+					else:
+						printSlow('The {} used {} and dealt {} damage which killed {}!'.format(mob.name,Atkname, damage, player.name), .005)
+						input()
+						quit()
 				else:
 					
 					printSlow('{} used {} and dealt {} damage!'.format(mob.name,Atkname, damage), .005)
 	player.Clean()
+	try:
+		mixer.music.stop()
+	except:
+		pass
 
 
 
