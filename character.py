@@ -321,9 +321,16 @@ class chtrcls():
 		
 		self.CSoul -= 3
 
-		self.CHP += self.HP//5
-		if self.CHP > self.HP:
-			self.CHP = self.HP
+		if 2 in self.Abil:
+			self.CHP += self.HP//4
+			if self.CHP > self.HP:
+				self.CHP = self.HP
+
+		else:
+			self.CHP += self.HP//5
+			if self.CHP > self.HP:
+				self.CHP = self.HP
+
 		return 0 , 'Minor heal'
 
 	def Psych(self):
@@ -357,10 +364,14 @@ class chtrcls():
 	def Heal(self):
 		
 		self.CSoul -= 5
-
-		self.CHP += (self.HP*35)//100
-		if self.CHP > self.HP:
-			self.CHP = self.HP
+		if 2 in self.Abil:
+			self.CHP += (self.HP*40)//100
+			if self.CHP > self.HP:
+				self.CHP = self.HP
+		else:
+			self.CHP += (self.HP*35)//100
+			if self.CHP > self.HP:
+				self.CHP = self.HP
 		return 0 , 'Heal'
 
 	def PFlash(self):
@@ -448,6 +459,11 @@ class chtrcls():
 
 	def mods(self):
 		delete = []
+		if 0 in self.Abil:
+			self.CHP += 25
+				if self.CHP > self.HP:
+					self.CHP = self.HP
+
 		if type(self.luck) != bool:
 			self.luck -= 1
 			print(self.luck)
@@ -490,14 +506,20 @@ class chtrcls():
 	def AM(self, attack):
 		if 6 in self.Abil:
 			if randint(1,9) < 3:
-				return attack*1.2
+				return int(attack*1.2)
 		return attack
+
 
 	def Clean(self):
 		for change in range(len(self.mod)):
 			if type(self.mod[change]) == tuple:
 				if self.mod[change][0] == '2Def:33%' or self.mod[change][0] == '1Def:33%' or self.mod[change][0] == '0Def:33%':
 					self.Def -= self.mod[change][1]
+
+				if self.mod[change][0] == 'ABuff':
+					self.Atk -= self.mod[change][2]
+
+		self.mod = []
 
 
 

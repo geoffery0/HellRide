@@ -151,12 +151,11 @@ def Player_choice(player,mobs):
 
 
 def strife(player, area = heaven.area):
-	try:
-		mixer.init()
-		mixer.music.load('rudebuster.mp3')
-		mixer.music.play(-1)
-	except:
-		pass
+	
+	mixer.init()
+	mixer.music.load('rudebuster.mp3')
+	mixer.music.play(-1)
+	
 	deady = 0
 	mobs = spawn(area)
 	while len(mobs) != 0:
