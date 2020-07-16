@@ -403,7 +403,7 @@ class chtrcls():
 			except:
 				pass
 		damage = (self.CHP*percent)//100
-		self.HP -= damage
+		self.CHP -= damage
 		return (3000 * percent)//100, 'Health Explosion'
 
 	def Vitality(self):
