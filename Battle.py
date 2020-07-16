@@ -256,7 +256,11 @@ def strife(player, area = heaven.area):
 						player.effect = None
 				if player.CHP <= 0:
 					if deady == 0 and 8 in player.Abil:
-						pass
+						deady = 1
+
+					elif deady == 0 and 1 in player.Abil:
+						deady = 1
+						player.CHP += player.HP//2
 					else:
 						printSlow('The {} used {} and dealt {} damage which killed {}!'.format(mob.name,Atkname, damage, player.name), .005)
 						input()

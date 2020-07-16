@@ -461,8 +461,8 @@ class chtrcls():
 		delete = []
 		if 0 in self.Abil:
 			self.CHP += 25
-				if self.CHP > self.HP:
-					self.CHP = self.HP
+			if self.CHP > self.HP:
+				self.CHP = self.HP
 
 		if type(self.luck) != bool:
 			self.luck -= 1
