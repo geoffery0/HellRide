@@ -45,9 +45,9 @@ def Display_enemies(mobs):
 		printSlow("HP:{}/{}".format(mobs[0].CHP,mobs[0].HP),.005)
 		printSlow("Soul:{}/{}".format(mobs[0].CSoul,mobs[0].Soul),.005)
 
-def Display_player(player):
+def Display_player(player,strength):
 	printSlow()
-	printSlow("{}".format(player.name),.005)
+	printSlow("{} - Current strength: {}%".format(player.name,strength*100),.005)
 	printSlow("HP:{}/{}".format(player.CHP,player.HP),.005)
 	printSlow("Soul:{}/{}".format(player.CSoul,player.Soul),.005)
 	printSlow("Ammo:{}/{}".format(player.CAmmo,player.Ammo),.005)
@@ -64,12 +64,12 @@ def Display_Battle_Guns(player):
 	for move in player.LGuns:
 		printSlow(move,.005)
 
-def Player_choice(player,mobs):
+def Player_choice(player,mobs,strength):
 	k = -1
 	s = -1
 	m = -1
 	select = None
-	Display_player(player)
+	Display_player(player,strength)
 	printSlow()
 
 	while s == -1 or player.check(select) == None or player.check(select) == 'Not enough Soul' or player.check(select) == 'Not enough Ammo':
@@ -171,11 +171,12 @@ def strife(player, area = heaven.area):
 	deady = 0
 	mobs = spawn(area)
 	while len(mobs) != 0:
+		strength = player.SoulStrength()
 		player.mods()
 		printSlow()
-		#printSlow(player.Def)
 		Display_enemies(mobs)
-		target , select = Player_choice(player,mobs)
+
+		target , select = Player_choice(player,mobs,strength)
 
 		if target != -1:
 
@@ -183,7 +184,7 @@ def strife(player, area = heaven.area):
 			if type(target) == int:
 				if type(attack) == int: 
 					damage = (attack*player.Atk) // mobs[target].Def
-					damage = player.AM(damage)
+					damage = int(player.AM(damage) * strength)
 					mobs[target].CHP -= damage
 					if mobs[target].CHP <= 0:
 						printSlow()
@@ -200,7 +201,7 @@ def strife(player, area = heaven.area):
 
 				elif attack == 'Siphon':
 					damage = (20*player.Atk) // mobs[target].Def
-					damage = player.AM(damage)
+					damage = int(player.AM(damage) * strength)
 					mobs[target].CHP -= damage
 
 					mobs[target].CSoul -= 4
@@ -227,9 +228,9 @@ def strife(player, area = heaven.area):
 
 				elif attack == 'VShotgun':
 					damage = (400*player.Atk) // mobs[target].Def
-					if player.CSoul == 0 and 7 in player.Abil:
+					if player.CAmmo == 0 and 7 in player.Abil:
 						damage = mobs[target].CHP
-					damage = player.AM(damage)
+					damage = int(player.AM(damage) * strength)
 					mobs[target].CHP -= damage
 
 					player.CHP += damage
@@ -256,7 +257,8 @@ def strife(player, area = heaven.area):
 		if len(mobs) != 0:
 			for mob in mobs:
 				attack, Atkname = mob.attack()
-				damage = (attack* mob.Atk) // player.Def
+				damage = (attack* mob.Atk) // (player.Def * strength)
+				damage = int(damage)
 				if mob.effect == 'acc':
 					if randint(1,2) == 2:
 						damage = 0

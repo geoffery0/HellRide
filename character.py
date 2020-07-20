@@ -97,7 +97,7 @@ class chtrcls():
 		if action == None:
 			return None
 
-		if action in '1 2 3 4 5 6 7 8 9 0 a s d f g h j k l q w e r t y u i o p z x c v b n m Q W E R T Y U I O P A S D F G H J K L Z X C V B N M - ( ) ':
+		if action in '1 2 3 4 5 6 7 8 9 0 a s d f g h j k l q w e r t y u i o p z x c v b n m Q W E R T Y U I O P A S D F G H J K L Z X C V B N M - ( ) \t':
 			return None
 
 		if action in 'Rest' and 0 in self.skills:
@@ -400,7 +400,7 @@ class chtrcls():
 			try:
 				percent = int(percent)
 				if percent >= (self.CHP/self.HP)*100:
-					percent = (self.CHP//self.HP)*100 - 1
+					percent = int((self.CHP/self.HP)*100) - 1
 				if percent < 0:
 					percent = 0
 			except:
@@ -469,7 +469,6 @@ class chtrcls():
 
 		if type(self.luck) != bool:
 			self.luck -= 1
-			print(self.luck)
 			if self.luck == -1:
 				self.luck = False
 		for change in range(len(self.mod)):
@@ -524,6 +523,18 @@ class chtrcls():
 
 		self.mod = []
 
+	def SoulStrength(self):
+		percent = self.CSoul / self.Soul
+		if percent >= .7:
+			return 1
+		elif percent >= .5:
+			return .8
+		elif percent >= .3:
+			return .5
+		elif percent > 0:
+			return .2
+		else:
+			return 0.01
 
 
 
