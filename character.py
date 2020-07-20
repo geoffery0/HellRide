@@ -205,76 +205,76 @@ class chtrcls():
 		if action == None:
 			return None
 
-		if action in 'Rest':
+		if action in 'Rest' and 0 in self.skills:
 			return self.Rest()
 
-		if action in 'Trip':
+		if action in 'Trip' and 4 in self.skills:
 			return self.Trip()
 
-		if action in 'Contagious Goof':
+		if action in 'Contagious Goof' and 5 in self.skills:
 			return self.Goof()
 
-		if action in 'Flail':
+		if action in 'Flail' and 6 in self.skills:
 			return self.Flail()
 
-		if action in '(X)plode':
+		if action in '(X)plode' and 5 in self.spells:
 			return self.xplode()
 
-		if action in 'Minor heal':
+		if action in 'Minor heal' and 0 in self.spells:
 			return self.minor()
 
-		if action in 'Psych':
+		if action in 'Psych' and 6 in self.spells:
 			return self.Psych()
 
-		if action in 'Cheat Life':
+		if action in 'Cheat Life' and 9 in self.spells:
 			return self.life()
 
-		if action in 'Load Gun':
+		if action in 'Load Gun' and 3 in self.spells:
 			return self.load()
 
-		if action in '+1 Tommy Gun':
+		if action in '+1 Tommy Gun' and 1 in self.Guns:
 			return self.Tommy()
 
-		if action in 'Heal':
+		if action in 'Heal' and 1 in self.spells:
 			return self.Heal()
 
-		if action in 'Pure Flash':
+		if action in 'Pure Flash' and 2 in self.skills:
 			return self.PFlash()
 
-		if action in 'Blast Flash':
+		if action in 'Blast Flash' and 2 in self.spells:
 			return self.BFlash()
 
-		if action in 'Def Buff' and self.Classname == 'Pure of Heart':
+		if action in 'Def Buff' and 1 in self.skills:
 			return self.DBuff()
 
-		if action in 'Health Explosion':
+		if action in 'Health Explosion' and 3 in self.skills:
 			return self.HealthX()
 
-		if action in 'Vitality Drip':
+		if action in 'Vitality Drip' and 4 in self.spells:
 			return self.Vitality()
 
-		if action in 'Bubble Skin':
+		if action in 'Bubble Skin' and 10 in self.spells:
 			return self.Bubble()
 
-		if action in 'Pool Pistol':
+		if action in 'Pool Pistol' and 0 in self.Guns:
 			return self.PoolP()
 
-		if action in 'Fuck Up':
+		if action in 'Fuck Up' and 7 in self.skills:
 			return self.FUp()
 
-		if action in 'Atk buff':
+		if action in 'Atk buff' and 8 in self.skills:
 			return self.ABuff()
 
-		if action in 'Soul Siphon':
+		if action in 'Soul Siphon' and 9 in self.skills:
 			return self.Siphon()
 
-		if action in 'Soular Burst':
+		if action in 'Soular Burst' and 8 in self.spells:
 			return self.Soular()
 
-		if action in 'Def debuff':
+		if action in 'Def debuff' and 7 in self.spells:
 			return self.DDebuff()
 
-		if action in 'Vampiric Shotgun':
+		if action in 'Vampiric Shotgun' and 2 in self.Guns:
 			return self.VShotgun()
 
 
