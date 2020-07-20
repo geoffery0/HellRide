@@ -111,6 +111,17 @@ def Player_choice(player,mobs):
 					if select in spell:
 						k = 0
 						s = 0
+						if 4 in player.spells:
+							if randint(1,10) == 1:
+								player.CSoul += player.Soul//7
+								if player.CSoul > player.Soul:
+									player.CSoul = player.Soul
+						if 3 in player.spells:
+							if randint(1,10) == 1:
+								player.CHP += player.HP//7
+								if player.CHP > player.HP:
+									player.CHP = player.HP
+
 						if select in 'Minor heal' or select in 'Cheat Life' or select in 'Load Gun' or select in 'Heal' or select in 'Vitality Drip' or select in 'Bubble Skin':
 							m = 0
 							target = -1
@@ -151,11 +162,12 @@ def Player_choice(player,mobs):
 
 
 def strife(player, area = heaven.area):
-	
-	mixer.init()
-	mixer.music.load('rudebuster.mp3')
-	mixer.music.play(-1)
-	
+	try:
+		mixer.init()
+		mixer.music.load('rudebuster.mp3')
+		mixer.music.play(-1)
+	except:
+		pass
 	deady = 0
 	mobs = spawn(area)
 	while len(mobs) != 0:
@@ -181,6 +193,7 @@ def strife(player, area = heaven.area):
 					else:
 						printSlow()
 						printSlow('{} used {} and dealt {} damage to the {}!'.format(player.name,select, damage,mobs[target].name), .005)
+
 				elif attack == 'acc':
 					mobs[target].effect = 'acc'
 					printSlow("{} used {} and lowered the {}'s accuracy!".format(player.name,select, mobs[target].name), .005)
@@ -261,6 +274,11 @@ def strife(player, area = heaven.area):
 					elif deady == 0 and 1 in player.Abil:
 						deady = 1
 						player.CHP += player.HP//2
+					elif deady == 0 and 12 in player.Abil:
+						if randint(1,2) == 1:
+							deady = 1
+						else:
+							player.CHP += 1
 					else:
 						printSlow('The {} used {} and dealt {} damage which killed {}!'.format(mob.name,Atkname, damage, player.name), .005)
 						input()
@@ -274,21 +292,5 @@ def strife(player, area = heaven.area):
 	except:
 		pass
 
-
-
-'''
-char = None
-while char == None:
-	char = inputSlow('Pure of Heart or Dumb of Ass? \n \n')
-	if char == 'Pure of Heart':
-		player = chtrcls(0,'Jake')
-	elif char == 'Dumb of Ass':
-		player = chtrcls(1,'Jake')
-	else:
-		char = None
-
-
-strife(player)
-'''
 
 

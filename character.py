@@ -100,102 +100,102 @@ class chtrcls():
 		if action in '1 2 3 4 5 6 7 8 9 0 a s d f g h j k l q w e r t y u i o p z x c v b n m Q W E R T Y U I O P A S D F G H J K L Z X C V B N M - ( ) ':
 			return None
 
-		if action in 'Rest':
+		if action in 'Rest' and 0 in self.skills:
 			return 0
 
-		if action in 'Trip':
+		if action in 'Trip' and 4 in self.skills:
 			return 0
 
-		if action in 'Contagious Goof':
+		if action in 'Contagious Goof' and 5 in self.skills:
 			return 0
 
-		if action in 'Flail':
+		if action in 'Flail' and 6 in self.skills:
 			return 0
 
-		if action in 'Pure Flash':
+		if action in 'Pure Flash' and 2 in self.skills:
 			return 0
 
-		if action in '(X)plode':
+		if action in '(X)plode' and 5 in self.spells:
 			if self.CSoul < 5:
 				return 'Not enough Soul'
 			return 0
 
-		if action in 'Minor heal':
+		if action in 'Minor heal' and 0 in self.spells:
 			if self.CSoul < 3:
 				return 'Not enough Soul'
 			return 0
 
-		if action in 'Psych':
+		if action in 'Psych' and 6 in self.spells:
 			if self.CSoul < 4:
 				return 'Not enough Soul'
 			return 0
 
-		if action in 'Cheat Life':
+		if action in 'Cheat Life' and 9 in self.spells:
 			if self.CSoul < 8:
 				return 'Not enough Soul'
 			return 0
 
-		if action in 'Load Gun':
+		if action in 'Load Gun' and 3 in self.spells:
 			if self.CSoul < 4:
 				return 'Not enough Soul'
 			return 0
 
-		if action in '+1 Tommy Gun':
+		if action in '+1 Tommy Gun' and 1 in self.Guns:
 			if self.CAmmo < 1:
 				return 'Not enough Ammo'
 			return 0
 
-		if action in 'Heal':
+		if action in 'Heal' and 1 in self.spells:
 			if self.CSoul < 5:
 				return 'Not enough Soul'
 			return 0
 
-		if action in 'Blast Flash':
+		if action in 'Blast Flash' and 2 in self.spells:
 			if self.CSoul < 3:
 				return 'Not enough Soul'
 			return 0
 
-		if action in 'Def Buff' and self.Classname == 'Pure of Heart':
+		if action in 'Def Buff' and 1 in self.skills:
 			return 0
 
-		if action in 'Health Explosion':
+		if action in 'Health Explosion' and 3 in self.skills:
 			return 0
 
-		if action in 'Vitality Drip':
+		if action in 'Vitality Drip' and 4 in self.spells:
 			if self.CSoul < 5:
 				return 'Not enough Soul'
 			return 0
 
-		if action in 'Bubble Skin':
+		if action in 'Bubble Skin' and 10 in self.spells:
 			if self.CSoul < 4:
 				return 'Not enough Soul'
 			return 0
 
-		if action in 'Pool Pistol':
+		if action in 'Pool Pistol' and 0 in self.Guns:
 			if self.CAmmo < 1:
 				return 'Not enough Ammo'
 			return 0
 
-		if action in 'Fuck Up':
+		if action in 'Fuck Up' and 7 in self.skills:
 			return 0
 
-		if action in 'Atk buff':
+		if action in 'Atk buff' and 8 in self.skills:
 			return 0
 
-		if action in 'Soul Siphon':
+		if action in 'Soul Siphon' and 9 in self.skills:
 			return 0
 
-		if action in 'Soular Burst':
+		if action in 'Soular Burst' and 8 in self.spells:
 			if self.CSoul < 7:
 				return 'Not enough Soul'
 			return 0
 
-		if action in 'Def debuff':
+		if action in 'Def debuff' and 7 in self.spells:
 			if self.CSoul < 4:
 				return 'Not enough Soul'
 			return 0
 
-		if action in 'Vampiric Shotgun':
+		if action in 'Vampiric Shotgun' and 2 in self.Guns:
 			if self.CAmmo < 1:
 				return 'Not enough Ammo'
 			return 0
@@ -315,7 +315,10 @@ class chtrcls():
 			self.CHP -= self.HP//4
 			if self.CHP <= 0:
 				self.CHP = 1
-		return 240 , '(X)plode'
+		damage = 240
+		if randint(1,10) == 1:
+			damage *= 1.2
+		return int(damage) , '(X)plode'
 
 	def minor(self):
 		
@@ -393,7 +396,7 @@ class chtrcls():
 	def HealthX(self):
 		percent = None
 		while percent == None:
-			percent = inputSlow('How much life do you want to use?(Percent as a whole number): ')
+			percent = inputSlow('How much life({}% left) do you want to use?(Percent as a whole number): '.format((self.CHP/self.HP)*100))
 			try:
 				percent = int(percent)
 				if percent >= (self.CHP/self.HP)*100:
@@ -556,17 +559,17 @@ def Abilities(index):
 
 	elif index == 3:
 		name = "Soothing Spells"
-		desc = "Chance to heal when casting spells."
+		desc = "Chance to heal when casting projections."
 		return [name,desc]
 
 	elif index == 4:
 		name = "Rollback Spells"
-		desc = "Chance to heal MP when casting spells."
+		desc = "Chance to heal MP when casting projections."
 		return [name,desc]
 
 	elif index == 5:
 		name = "Busty Mumbo Jumbo"
-		desc = "Chance to increase power of spells."
+		desc = "Chance to increase power of projections."
 		return [name,desc]
 
 	elif index == 6:
@@ -689,7 +692,7 @@ def Spells(index):
 
 	elif index == 3:
 		name = "Load Gun - Cost: 4 Soul"
-		desc = "Regenerates 3 ammo - 4 Soul"
+		desc = "Uses soul to regenerate 3 ammo"
 		return [name,desc]
 
 	elif index == 4:

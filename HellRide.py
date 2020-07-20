@@ -111,4 +111,4 @@ doya = 'butts'
 while doya != '':
 
 	strife(player)
-	imput = inputSlow('Type anything to play again (same class)')
+	doya = inputSlow('Type anything to play again (same class)')
