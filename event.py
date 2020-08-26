@@ -14,7 +14,7 @@ def BeforeAtk(event,turns,mobs,player):
 
 	if event == "Tutorial":
 		if turns == 1:
-			printSlow("\nGAME: To use moves, either write out the entire word(Ctrl + c,Ctrl + v) or type the first two letters lowercase\n",.005)
+			printSlow("\nGAME: To choose a type of action, either write out the entire word(Ctrl + c,Ctrl + v) or type the first two letters lowercase\n",.005)
 		else:
 			pass
 
@@ -35,7 +35,7 @@ def ChoiceAtk(event,turns,mobs,player,choice):
 
 	if event == "Tutorial":
 		if turns == 1:
-			printSlow("GAME: Type the name of the move that you want to use (Case sensitive - Copying it will yield best results)\nGAME: If you type an incomplete move the game will guess what move you were trying to use\n",.005)
+			printSlow("GAME: Type the name of the move that you want to use (Case sensitive - Copying it will yield best results)\nGAME: If you type an incomplete move the game will guess what move you were trying to use\nGAME: Typing 'Back' or 'back' will return you to the previous selection\n",.005)
 
 		if choice == 'skills':
 			printSlow("GAME: These are your skills, they are unique to this class and cost nothing to use, however they are weaker than other moves\n",.005)

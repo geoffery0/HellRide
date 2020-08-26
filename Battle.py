@@ -138,7 +138,7 @@ def Player_choice(player,mobs,strength,event,turns):
 				printSlow()
 				select = inputSlow('Gun: ')
 				if select == 'back' or select == 'Back':
-					break2
+					break
 				for Gun in player.LGuns:
 					if select in Gun:
 						k = 0
@@ -312,6 +312,6 @@ def strife(player,event = None, area = heaven.area):
 	except:
 		pass
 
-#player = chtrcls(0,'jay')
-#strife(player,'Tutorial')
+player = chtrcls(0,'jay')
+strife(player,'Tutorial')
 
