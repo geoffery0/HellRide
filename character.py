@@ -350,7 +350,7 @@ class chtrcls():
 	def load(self):
 		
 		self.CSoul -= 4
-		self.CAmmo += 3
+		self.CAmmo += 2
 		if self.CAmmo > self.Ammo:
 			self.CAmmo = self.Ammo
 		return 0, 'Load Gun'
@@ -575,7 +575,7 @@ def Abilities(index):
 
 	elif index == 4:
 		name = "Rollback Spells"
-		desc = "Chance to heal MP when casting projections."
+		desc = "Chance to heal Soul when casting projections."
 		return [name,desc]
 
 	elif index == 5:
@@ -634,7 +634,7 @@ def Skills(index):
 
 	elif index == 2:
 		name = "Pure Flash"
-		desc = "Damaging move, recovers 1 MP"
+		desc = "Damaging move, recovers 1 Soul"
 		return [name,desc]
 
 	elif index == 3:

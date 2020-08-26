@@ -12,6 +12,14 @@ def printSlow(words = '', num = .015):
 			sleep(num)
 		print(char, end='', flush=True)
 	print()
+
+def printSlowLoop(words = '', num = .015):
+	words = str(words)
+	for char in words:
+		if char != ' ':
+			sleep(num)
+		print(char, end='', flush=True)
+	print()
 	
 
 
