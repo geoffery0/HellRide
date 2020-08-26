@@ -312,6 +312,6 @@ def strife(player,event = None, area = heaven.area):
 	except:
 		pass
 
-player = chtrcls(0,'jay')
-strife(player,'Tutorial')
+#player = chtrcls(0,'jay')
+#strife(player,'Tutorial')
 
