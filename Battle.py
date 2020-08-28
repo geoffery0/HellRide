@@ -7,7 +7,7 @@ from event import *
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = 'hide'
 from pygame import mixer
-heaven = Location(0)
+heaven = Location(0,'Heavens Gate')
 
 #int,None/int --> list of objects
 #takes an area code and uses to determine how many and what kind of enemies will spawn
@@ -168,7 +168,7 @@ def Player_choice(player,mobs,strength,event,turns):
 	return target , select
 
 
-def strife(player,event = None, area = heaven.area):
+def strife(player, area = heaven.area, event = None):
 	try:
 		mixer.init()
 		mixer.music.load('rudebuster.mp3')
@@ -313,5 +313,5 @@ def strife(player,event = None, area = heaven.area):
 		pass
 
 #player = chtrcls(0,'jay')
-#strife(player,'Tutorial')
+#strife(player,heaven.area,'Tutorial')
 

@@ -21,7 +21,7 @@ printSlow()
 printSlow("Beta: Buckle up %s we're already balls deep" %(gamername))
 printSlow()
 printSlow('GAME: You see pearly white gates ahead of you,')
-printSlow("      you can't be certain but you think they may be THE Pearly White Gates.")
+printSlow("GAME: you can't be certain but you think they may be THE Pearly White Gates.")
 printSlow()
 printSlow('GAME: An explosion booms in front of you, cracks spread upwards along its pearly surface.')
 printSlow()
@@ -102,15 +102,19 @@ player.lvl = 1
 #Display_Skills(player.skills)
 #Display_Spells(player.spells)
 #Display_Guns(player.Guns)
-area = Location(0)
+area = Location(0,'Heavens Gate')
 printSlow()
 printSlow()
 Display_Location(area)
 printSlow('GAME: Mobs of angels and spirits rush to defend their city')
 printSlow('Beta: Prepare yourself!')
 printSlow()
-doya = 'butts'
+player.Location = Hgate
+'''doya = 'butts'
 while doya != '':
 
-	strife(player,'Tutorial')
-	doya = inputSlow('Type anything to play again (same class)')
+	strife(player,area.area,'Tutorial')
+	doya = inputSlow('Type anything to play again (same class)')'''
+strife(player,area.area,'Tutorial')
+
+Move(player)

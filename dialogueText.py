@@ -19,7 +19,7 @@ def printSlowLoop(words = '', num = .015):
 		if char != ' ':
 			sleep(num)
 		print(char, end='', flush=True)
-	print()
+	
 	
 
 
