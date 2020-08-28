@@ -172,6 +172,7 @@ def strife(player, area = heaven.area, event = None):
 	try:
 		mixer.init()
 		mixer.music.load('rudebuster.mp3')
+		mixer.music.set_volume(.7)
 		mixer.music.play(-1)
 	except:
 		pass
@@ -308,7 +309,8 @@ def strife(player, area = heaven.area, event = None):
 				AfterAtk(event,turns,mobs,player)
 	player.Clean()
 	try:
-		mixer.music.stop()
+		mixer.music.fadeout(1000)
+		#mixer.music.stop()
 	except:
 		pass
 
