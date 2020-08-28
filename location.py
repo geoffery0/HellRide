@@ -18,6 +18,10 @@ class Location():
 
 		if area == 1:
 			self.name = 'Solstice Chambere'
+			if rates == None:
+				self.rates = 0
+			else:
+				self.rates = rates
 
 	
 
@@ -28,15 +32,15 @@ Bopp = Location(0,'Bridge of Opportunity')
 Donus = Location(0,'Depression of Onus')
 Tonus = Location(0,'Terminus of Onus')
 Cfate = Location(0,'Crossroads of Fate', 100)
-FCS = Location(0,'Fates Coil: South')
-FCSW = Location(0,'Fates Coil: South West')
-FCW = Location(0,'Fates Coil: West')
-FCNW = Location(0,'Fates Coil: North West')
-FCN = Location(0,'Fates Coil: North')
-FCNE = Location(0,'Fates Coil: North East')
-FCE = Location(0,'Fates Coil: East')
+FCS = Location(0,'Fates Coil:S')
+FCSW = Location(0,'Fates Coil:SW')
+FCW = Location(0,'Fates Coil:W')
+FCNW = Location(0,'Fates Coil:NW')
+FCN = Location(0,'Fates Coil:N')
+FCNE = Location(0,'Fates Coil:NE')
+FCE = Location(0,'Fates Coil:E')
 Rpast = Location(0,'Realities Pasture')
-Scham = Location(1,'Solstice Chambere', 0)
+Scham = Location(1,'Solstice Chambere')
 
 Hgate.north = Gthresh
 Gthresh.south = Hgate

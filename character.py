@@ -94,35 +94,7 @@ class chtrcls():
 		self.effect = None
 		self.luck = False
 
-	def Move(self):
-		while True == True:
-			printSlow('\n\n{}:\n'.format(self.Location.room))
-			if randint(1,100) <= self.Location.rates:
-				strife(self,self.Location.area)
-			if self.Location.north != None:
-				printSlowLoop('North: {}    '.format(self.Location.north.room))
-			if self.Location.west != None:
-				printSlowLoop('West: {}    '.format(self.Location.west.room))
-			if self.Location.east != None:
-				printSlowLoop('East: {}    '.format(self.Location.east.room))
-			if self.Location.south != None:
-				printSlow('North: {}'.format(self.Location.north.room))
-			select = None
-			while select == None:
-				printSlow('GAME: Which way do you want to go?')
-				select = inputSlow('Direction: ')
-				if select in ['n','north','N','North'] and self.Location.north != None:
-					self.Location = self.Location.north
-				elif select in ['s','south','S','South'] and self.Location.south != None:
-					self.Location = self.Location.south
-				elif select in ['e','east','E','East'] and self.Location.east != None:
-					self.Location = self.Location.east
-				elif select in ['w','west','W','West'] and self.Location.west != None:
-					self.Location = self.Location.west
-				elif select in ['end','End']:
-					quit()
-				else:
-					select = None
+	
 
 	def check(self,action):
 		if action == None:

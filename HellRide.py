@@ -6,6 +6,7 @@ from dialogueText import *
 from character import *
 from Display import *
 from Battle import *
+from Movement import *
 import pkg_resources
 
 
