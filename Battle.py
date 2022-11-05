@@ -66,14 +66,19 @@ def Display_Battle_Guns(player):
 		printSlow(move,.005)
 
 def Player_choice(player,mobs,strength,event,turns):
+	# k checks that the move chosen is valid inside each action type loop
 	k = -1
+	# s makes sure that a move is chosen overall and allows for the first introduction to the loop
 	s = -1
+	# m allows for targeting enemies, or no target
 	m = -1
+	# select is what the user types
 	select = None
 	Display_player(player,strength)
 	printSlow()
 	BeforeAtk(event,turns,mobs,player)
 
+	# makes sure that the player chooses an action and has enough resources for it
 	while s == -1 or player.check(select) == None or player.check(select) == 'Not enough Soul' or player.check(select) == 'Not enough Ammo':
 		if player.check(select) == 'Not enough Soul' or player.check(select) == 'Not enough Ammo':
 			printSlow('{} for that attack!'.format(player.check(select)),.005)
@@ -89,6 +94,7 @@ def Player_choice(player,mobs,strength,event,turns):
 		
 		if 'sk' in choice or 'Skills' in choice or 'skills' in choice:
 			ChoiceAtk(event,turns,mobs,player,'skills')
+			
 			while k == -1:
 				Display_Battle_Skills(player)
 				printSlow()
@@ -167,16 +173,17 @@ def Player_choice(player,mobs,strength,event,turns):
 
 	return target , select
 
-
+# battle loop
 def strife(player, area = heaven.area, event = None):
 	try:
 		mixer.init()
 		mixer.music.load('rudebuster.mp3')
 		mixer.music.set_volume(.7)
-		mixer.music.play(-1)
+		mixer.music.play(-1,0,2000)
 	except:
 		pass
-	deady = 0
+	# holds whether or not the character has been revived this battle
+	ressurect = 0
 	mobs = spawn(area)
 	if len(mobs) == 1:
 		printSlow('GAME: An enemy appears before you')
@@ -275,8 +282,7 @@ def strife(player, area = heaven.area, event = None):
 		if len(mobs) != 0:
 			for mob in mobs:
 				attack, Atkname = mob.attack()
-				damage = (attack* mob.Atk) // (player.Def * strength)
-				damage = int(damage)
+				damage = int((attack* mob.Atk) // (player.Def * strength))
 				if mob.effect == 'acc':
 					if randint(1,2) == 2:
 						damage = 0
@@ -288,15 +294,15 @@ def strife(player, area = heaven.area, event = None):
 					if player.effect[1] <= 0:
 						player.effect = None
 				if player.CHP <= 0:
-					if deady == 0 and 8 in player.Abil:
-						deady = 1
+					if ressurect == 0 and 8 in player.Abil:
+						ressurect = 1
 
-					elif deady == 0 and 1 in player.Abil:
-						deady = 1
+					elif ressurect == 0 and 1 in player.Abil:
+						ressurect = 1
 						player.CHP += player.HP//2
-					elif deady == 0 and 12 in player.Abil:
+					elif ressurect == 0 and 12 in player.Abil:
 						if randint(1,2) == 1:
-							deady = 1
+							ressurect = 1
 						else:
 							player.CHP += 1
 					else:
